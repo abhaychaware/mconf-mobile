@@ -4,3 +4,6 @@
 [submodule "bbb-java"]
 	path = bbb-java
 	url = https://github.com/abhaychaware/bbb-java
+[submodule "flazr"]
+	path = flazr
+	url = https://github.com/abhaychaware/flazr
