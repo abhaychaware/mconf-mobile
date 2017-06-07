@@ -6,6 +6,7 @@ import org.mconf.android.core.video.CaptureConstants;
 import org.mconf.android.core.video.VideoPublish;
 import org.mconf.android.core.voip.VoiceModule;
 import org.mconf.bbb.BigBlueButtonClient;
+import org.mconf.bbb.api.ApplicationService;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -56,10 +57,23 @@ public class BigBlueButton extends Application {
 		if (voice == null 
 				&& getHandler().getJoinService() != null
 				&& getHandler().getJoinService().getJoinedMeeting() != null
-				&& getHandler().getJoinService().getJoinedMeeting().getReturncode().equals("SUCCESS"))
-			voice = new VoiceModule(this,
-					getHandler().getMyUserId() + "-" + getHandler().getJoinService().getJoinedMeeting().getFullname(),
-					getHandler().getJoinService().getApplicationService().getServerUrl()); 
+				&& getHandler().getJoinService().getJoinedMeeting().getReturncode().equals("SUCCESS")
+				)
+			{
+				// Added by Abhay Chaware for BBB 0.81 comptability
+				if (getHandler().getJoinService().getVersion().equals(ApplicationService.VERSION_0_81))
+				{
+					voice = new VoiceModule(this,
+							getHandler().getMyUserId() + "-bbbID-" + getHandler().getJoinService().getJoinedMeeting().getFullname(),
+							getHandler().getJoinService().getApplicationService().getServerUrl()); 
+				}
+				else
+				{
+					voice = new VoiceModule(this,
+							getHandler().getMyUserId() + "-" + getHandler().getJoinService().getJoinedMeeting().getFullname(),
+							getHandler().getJoinService().getApplicationService().getServerUrl()); 
+				}
+			}
 		return voice;
 	}
 	

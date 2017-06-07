@@ -76,6 +76,11 @@ public class ListenerAdapter extends BaseAdapter {
         }
         
         String name = entry.getCidName();
+        // changed by Abhay Chaware for BBB 0.81 compatibility
+		if( name.indexOf("-")!=-1) {
+			name = name.substring(name.lastIndexOf("-")+1);
+		}
+        
         final TextView contactName = (TextView) convertView.findViewById(R.id.listener_name);
         contactName.setTextAppearance(viewGroup.getContext(), R.style.ParticipantNameStyle);
         contactName.setText(name);
