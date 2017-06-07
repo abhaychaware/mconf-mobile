@@ -7,6 +7,3 @@
 [submodule "bbb-java"]
 	path = bbb-java
 	url = git://github.com/mconf/bbb-java.git
-[submodule "bbb-java @ c613fdb"]
-	path = bbb-java @ c613fdb
-	url = https://github.com/abhaychaware/bbb-java
